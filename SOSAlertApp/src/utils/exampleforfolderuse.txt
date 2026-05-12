@@ -1,0 +1,14 @@
+Opis: Małe funkcje pomocnicze.
+
+Co tutaj trzymać:
+
+formatowanie dat
+walidacje
+helpery
+obliczenia
+
+Przykłady plików:
+
+formatDate.js
+validateEmail.js
+distanceCalculator.js

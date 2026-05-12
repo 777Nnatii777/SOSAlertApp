@@ -1,0 +1,16 @@
+Opis: Komunikacja z backendem i API.
+
+Co tutaj trzymać:
+
+firebase
+api
+auth
+gps
+powiadomienia
+
+Przykłady plików:
+
+api.js
+firebase.js
+locationService.js
+notificationService.js

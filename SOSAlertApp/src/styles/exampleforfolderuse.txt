@@ -1,0 +1,138 @@
+Opis: Globalne style aplikacji.
+
+Co tutaj trzymać:
+
+wspólne style
+typography
+spacing
+themes
+
+Przykłady plików:
+
+globalStyles.js
+typography.js
+theme.js
+
+Pelo przeczytaj !!!
+
+W React Native w projekcie używamy głównie:
+
+StyleSheet
+inline styles
+
+Nie używamy normalnego CSS jak w stronach WWW
+.
+
+==================================================
+STYLESSHEET
+
+To podstawowy system stylowania React Native.
+
+Style tworzy się w JavaScript:
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#111",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  title: {
+    color: "white",
+    fontSize: 28,
+    fontWeight: "bold",
+  },
+});
+
+Potem używa się:
+
+<View style={styles.container}>
+  <Text style={styles.title}>SOS Alert</Text>
+</View>
+==================================================
+DO CZEGO UŻYWAMY STYLESSHEET
+
+StyleSheet używamy do:
+
+layoutów
+ekranów
+komponentów
+buttonów
+cardów
+navbarów
+spacingu
+kolorów
+typography
+reusable UI
+
+To główny system stylowania aplikacji.
+
+==================================================
+DLACZEGO STYLESSHEET
+
+Plusy:
+
+czytelny kod
+dobra wydajność
+łatwe utrzymanie projektu
+łatwo organizować style
+dobre dla większych aplikacji
+oficjalny sposób React Native
+==================================================
+INLINE STYLES
+
+Inline styles to szybkie style pisane bezpośrednio w komponencie.
+
+Przykład:
+
+<Text style={{ color: "white", fontSize: 24 }}>
+  Alert
+</Text>
+==================================================
+DO CZEGO UŻYWAMY INLINE STYLES
+
+Najczęściej do:
+
+małych zmian
+dynamicznych wartości
+szybkich testów
+pojedynczych elementów
+
+Np:
+
+<Text style={{ color: isDanger ? "red" : "green" }}>
+==================================================
+JAK PISZEMY STYLE W PROJEKCIE
+
+Najczęściej:
+
+główne style -> StyleSheet
+małe dynamiczne rzeczy -> inline styles
+
+Przykład:
+
+<View style={styles.card}>
+  <Text style={{ color: danger ? "red" : "white" }}>
+    Alert
+  </Text>
+</View>
+==================================================
+NAJWAŻNIEJSZA ZASADA
+
+Nie wrzucamy wszystkich stylów inline.
+
+Duże rzeczy:
+
+StyleSheet
+
+Małe dynamiczne rzeczy:
+
+inline styles
+
+Wtedy kod jest:
+
+czysty
+czytelny
+łatwy do rozwijania
+łatwy dla całej ekipy.

@@ -1,0 +1,16 @@
+Opis: Małe elementy UI wielokrotnego użytku. Nie robisz tutaj całych ekranów.
+
+Co tutaj trzymać:
+
+buttony
+inputy
+karty
+modale
+loadingi
+
+Przykłady plików:
+
+SOSButton.js
+CustomInput.js
+AlertCard.js
+Loader.js

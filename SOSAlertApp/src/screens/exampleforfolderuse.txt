@@ -1,0 +1,15 @@
+Opis: Całe ekrany aplikacji. Jeden plik = jeden ekran.
+
+Co tutaj trzymać:
+
+home
+login
+mapa
+ustawienia
+
+Przykłady plików:
+
+HomeScreen.js
+LoginScreen.js
+MapScreen.js
+SettingsScreen.js

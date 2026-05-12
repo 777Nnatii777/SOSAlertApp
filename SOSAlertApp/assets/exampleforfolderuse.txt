@@ -1,0 +1,15 @@
+Opis: Tutaj wrzucasz wszystkie pliki statyczne aplikacji.
+
+Co tutaj trzymać:
+
+zdjęcia
+ikony
+fonty
+dźwięki
+animacje
+
+Przykłady plików:
+
+logo.png
+background.jpg
+notification.mp3

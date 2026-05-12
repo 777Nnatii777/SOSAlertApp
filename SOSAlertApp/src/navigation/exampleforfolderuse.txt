@@ -1,0 +1,14 @@
+Opis: Przechodzenie między ekranami. Tutaj konfigurujesz routing aplikacji.
+
+Co tutaj trzymać:
+
+stack navigation
+tabs
+routing
+flow aplikacji
+
+Przykłady plików:
+
+AppNavigator.js
+AuthNavigator.js
+BottomTabs.js

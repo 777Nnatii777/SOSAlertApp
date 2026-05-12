@@ -1,0 +1,14 @@
+Opis: Stałe wartości używane w aplikacji.
+
+Co tutaj trzymać:
+
+kolory
+route names
+config
+app constants
+
+Przykłady plików:
+
+colors.js
+routes.js
+config.js

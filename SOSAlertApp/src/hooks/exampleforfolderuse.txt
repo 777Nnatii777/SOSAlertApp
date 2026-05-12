@@ -1,0 +1,14 @@
+Opis: Własne hooki React. Nazwy zawsze zaczynają się od use.
+
+Co tutaj trzymać:
+
+auth state
+location state
+dark mode
+custom logic
+
+Przykłady plików:
+
+useAuth.js
+useLocation.js
+useTheme.js
