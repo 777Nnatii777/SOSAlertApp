@@ -136,3 +136,7 @@ czysty
 czytelny
 łatwy do rozwijania
 łatwy dla całej ekipy.
+
+OK
+Dodałem tailwanda
+Działa działa
