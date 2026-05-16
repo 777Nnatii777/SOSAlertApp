@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, Image } from 'react-native';
-import { LoginInput } from './ui/loginInput';
-import { LogInButton } from './ui/loginButton';
+import { LoginInput } from './ui/LoginInput';
+import { LoginButton } from './ui/LoginButton';
 
 type Props = {
     onSubmit: (email: string, password: string) => Promise<void> | void;
@@ -49,7 +49,7 @@ export function LoginForm({ onSubmit }: Props) {
                 autoComplete="password"
             />
             {error && <Text className="text-xs text-red-600">{error}</Text>}
-            <LogInButton loading={loading} onPress={handleSubmit} />
+            <LoginButton loading={loading} onPress={handleSubmit} />
         </View>
     );
 }

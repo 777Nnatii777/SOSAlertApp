@@ -5,7 +5,7 @@ type Props = PressableProps & {
     label?: string;
 };
 
-export function LogInButton({ loading, disabled, label = 'Log in', ...rest }: Props) {
+export function LoginButton({ loading, disabled, label = 'Log in', ...rest }: Props) {
     const isDisabled = disabled || loading;
     return (
         <Pressable

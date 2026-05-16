@@ -4,7 +4,7 @@ type Props = PressableProps & {
     label?: string;
 };
 
-export function LogOutButton({ label = 'Log out', ...rest }: Props) {
+export function LogoutButton({ label = 'Log out', ...rest }: Props) {
     return (
         <Pressable
             {...rest}
