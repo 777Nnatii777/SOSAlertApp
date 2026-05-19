@@ -1,21 +1,24 @@
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {LogoutButton} from "./LogoutButton";
+import type { Role } from '../../types/auth';
 
-type Role = 'volunteer' | 'operator';
 
 type Props = {
-    role: Role;
+    role?: Role;
     onLogout: () => void;
 };
 
 const ROLE_CONFIG: Record<Role, { label: string; icon: keyof typeof Ionicons.glyphMap }> = {
-    volunteer: { label: 'Ochotnik', icon: 'person-outline' },
-    operator: { label: 'Operator', icon: 'headset-outline' },
+    Volunteer: { label: 'Ochotnik', icon: 'person-outline' },
+    Dispatcher: { label: 'Operator', icon: 'headset-outline' },
+    Admin: { label: 'Administrator', icon: 'shield-outline' },
 };
 
+const FALLBACK = { label: 'Użytkownik', icon: 'person-outline' as const };
+
 export function TopBar({ role, onLogout }: Props) {
-    const { label, icon } = ROLE_CONFIG[role];
+    const { label, icon } = role ? ROLE_CONFIG[role] : FALLBACK;
 
     return (
         <View className="flex-row items-center justify-between px-4 h-14 bg-white border-b border-neutral-200">

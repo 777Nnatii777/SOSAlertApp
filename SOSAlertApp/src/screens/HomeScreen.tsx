@@ -5,17 +5,16 @@ import { TopBar } from '../components/ui/TopBar';
 import { BottomBar, type HomeTab } from '../components/ui/BottomBar';
 import { AddReportButton } from '../components/ui/AddReportButton';
 import { AddReportScreen } from './AddReportScreen';
+import { useAuth } from '../context/AuthContext';
 
-type Props = {
-    onLogout: () => void;
-};
 
-export function HomeScreen({ onLogout }: Props) {
+export function HomeScreen() {
+    const { roles, signOut } = useAuth();
     const [tab, setTab] = useState<HomeTab>('list');
     const [addingReport, setAddingReport] = useState(false);
 
-    // dodać pobieranie z API roli
-    const role = 'operator' as const;
+    const role = roles[0];
+
 
     if (addingReport) {
         return (
@@ -27,7 +26,7 @@ export function HomeScreen({ onLogout }: Props) {
 
     return (
         <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
-            <TopBar role={role} onLogout={onLogout} />
+            <TopBar role={role} onLogout={signOut} />
 
             <View className="flex-1 items-center justify-center">
                 {tab === 'map' ? (
@@ -44,7 +43,6 @@ export function HomeScreen({ onLogout }: Props) {
             <BottomBar
                 active={tab}
                 onChange={setTab}
-                onAddReport={() => setAddingReport(true)}
             />
         </SafeAreaView>
     );

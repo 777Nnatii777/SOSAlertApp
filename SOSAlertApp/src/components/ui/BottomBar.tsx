@@ -6,10 +6,9 @@ export type HomeTab = 'map' | 'list';
 type Props = {
     active: HomeTab;
     onChange: (tab: HomeTab) => void;
-    onAddReport: () => void;
 };
 
-export function BottomBar({ active, onChange, onAddReport }: Props) {
+export function BottomBar({ active, onChange, }: Props) {
     return (
         <View className="flex-row items-center border-t border-neutral-200 bg-white h-16">
             <TabButton

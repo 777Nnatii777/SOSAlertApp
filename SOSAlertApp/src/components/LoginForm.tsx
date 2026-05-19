@@ -34,12 +34,11 @@ export function LoginForm({ onSubmit }: Props) {
             />
 
             <LoginInput
-                label="Email"
+                label="Login"
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
-                autoComplete="email"
-                keyboardType="email-address"
+                autoComplete="username"
             />
             <LoginInput
                 label="Password"
