@@ -1,0 +1,26 @@
+export const VOIVODESHIPS = [
+    'Kraków',
+    'Nowy Sącz',
+    'Tarnów',
+    'powiat bocheński',
+    'powiat brzeski',
+    'powiat chrzanowski',
+    'powiat dąbrowski',
+    'powiat gorlicki',
+    'powiat krakowski',
+    'powiat limanowski',
+    'powiat miechowski',
+    'powiat myślenicki',
+    'powiat nowosądecki',
+    'powiat nowotarski',
+    'powiat olkuski',
+    'powiat oświęcimski',
+    'powiat proszowicki',
+    'powiat suski',
+    'powiat tarnowski',
+    'powiat tatrzański',
+    'powiat wadowicki',
+    'powiat wielicki',
+] as const;
+
+export type Voivodeship = (typeof VOIVODESHIPS)[number];

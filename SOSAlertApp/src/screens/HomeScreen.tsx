@@ -6,6 +6,7 @@ import { BottomBar, type HomeTab } from '../components/ui/BottomBar';
 import { AddReportButton } from '../components/ui/AddReportButton';
 import { AddReportScreen } from './AddReportScreen';
 import { useAuth } from '../context/AuthContext';
+import { EmergencyActionsSpace } from '../components/emergencyActions/EmergencyActionsSpace';
 
 
 export function HomeScreen() {
@@ -28,15 +29,25 @@ export function HomeScreen() {
         <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
             <TopBar role={role} onLogout={signOut} />
 
-            <View className="flex-1 items-center justify-center">
+            <View className="flex-1">
                 {tab === 'map' ? (
-                    <Text className="text-sm text-neutral-400">Mapa – do uzupełnienia.</Text>
+                    <View className="flex-1 items-center justify-center">
+                        <Text className="text-sm text-neutral-400">
+                            Mapa - do uzupełnienia.
+                        </Text>
+                    </View>
+                ) : role ? (
+                    <EmergencyActionsSpace role={role} />
                 ) : (
-                    <Text className="text-sm text-neutral-400">Lista zgłoszeń – pusta.</Text>
+                    <View className="flex-1">
+                        <Text className="text-sm text-neutral-400">
+                            Brak roli użytkownika.
+                        </Text>
+                    </View>
                 )}
             </View>
 
-            {tab === 'list' && (
+            {tab === 'list' && role === 'Dispatcher' && (
                 <AddReportButton onPress={() => setAddingReport(true)} />
             )}
 

@@ -1,27 +1,21 @@
-import { View, Text, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { KeyboardAvoidingView, Platform } from 'react-native';
+import { ScreenHeader } from '../components/ui/ScreenHeader';
+import { AddReportForm } from '../components/emergencyActions/AddReportForm';
 
 type Props = {
     onClose: () => void;
 };
 
 export function AddReportScreen({ onClose }: Props) {
-    return (
-        <View className="flex-1 bg-white">
-            <View className="flex-row items-center px-4 h-14 border-b border-neutral-200 gap-3">
-                <Pressable onPress={onClose} hitSlop={8}>
-                    <Ionicons name="arrow-back" size={24} color="#171717" />
-                </Pressable>
-                <Text className="text-base font-medium text-neutral-900">
-                    Nowe zgłoszenie
-                </Text>
-            </View>
 
-            <View className="flex-1 items-center justify-center p-4">
-                <Text className="text-sm text-neutral-400 text-center">
-                    Formularz zgłoszenia – do uzupełnienia.
-                </Text>
-            </View>
-        </View>
+    return (
+        <KeyboardAvoidingView
+            className="flex-1 bg-white"
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
+            <ScreenHeader title="Nowe zgłoszenie" onBack={onClose} />
+            <AddReportForm onSuccess={onClose} />
+        </KeyboardAvoidingView>
     );
 }
+
