@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export type HomeTab = 'map' | 'list';
+export type HomeTab = 'map' | 'list' | 'history';
 
 type Props = {
     active: HomeTab;
@@ -22,6 +22,12 @@ export function BottomBar({ active, onChange, }: Props) {
                 icon="map-outline"
                 active={active === 'map'}
                 onPress={() => onChange('map')}
+            />
+            <TabButton
+                label="Historia"
+                icon="time-outline"
+                active={active === 'history'}
+                onPress={() => onChange('history')}
             />
         </View>
     );

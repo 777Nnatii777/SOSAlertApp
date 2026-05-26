@@ -5,7 +5,7 @@ type Props = PressableProps & {
     label?: string;
 };
 
-export function LoginButton({ loading, disabled, label = 'Log in', ...rest }: Props) {
+export function LoginButton({ loading, disabled, label = 'Zaloguj się', ...rest }: Props) {
     const isDisabled = disabled || loading;
     return (
         <Pressable
@@ -16,7 +16,7 @@ export function LoginButton({ loading, disabled, label = 'Log in', ...rest }: Pr
             }`}
         >
             <Text className="text-white text-base font-medium">
-                {loading ? 'Logging in…' : label}
+                {loading ? 'Logowanie…' : label}
             </Text>
         </Pressable>
     );

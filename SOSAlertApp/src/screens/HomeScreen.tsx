@@ -1,20 +1,26 @@
 import { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TopBar } from '../components/ui/TopBar';
 import { BottomBar, type HomeTab } from '../components/ui/BottomBar';
 import { AddReportButton } from '../components/ui/AddReportButton';
 import { AddReportScreen } from './AddReportScreen';
 import { useAuth } from '../context/AuthContext';
-import { EmergencyActionsSpace } from '../components/emergencyActions/EmergencyActionsSpace';
+import {Roles} from "../types/auth";
+import {ReportDetailsScreen} from "./ReportDetailsScreen";
+import {MapView} from "./home/MapView";
+import {ListView} from "./home/ListView";
+import {HistoryView} from "./home/HistoryView";
 
 
 export function HomeScreen() {
     const { roles, signOut } = useAuth();
+    const isDispatcher = roles.includes(Roles.Dispatcher);
+    const role = isDispatcher ? Roles.Dispatcher : Roles.Volunteer;
+
     const [tab, setTab] = useState<HomeTab>('list');
     const [addingReport, setAddingReport] = useState(false);
-
-    const role = roles[0];
+    const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
 
 
     if (addingReport) {
@@ -25,29 +31,38 @@ export function HomeScreen() {
         );
     }
 
+    if (selectedActionId) {
+        return (
+            <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
+                <ReportDetailsScreen
+                    actionId={selectedActionId}
+                    onClose={() => setSelectedActionId(null)}
+                />
+            </SafeAreaView>
+        );
+    }
+
     return (
         <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
             <TopBar role={role} onLogout={signOut} />
 
             <View className="flex-1">
-                {tab === 'map' ? (
-                    <View className="flex-1 items-center justify-center">
-                        <Text className="text-sm text-neutral-400">
-                            Mapa - do uzupełnienia.
-                        </Text>
-                    </View>
-                ) : role ? (
-                    <EmergencyActionsSpace role={role} />
-                ) : (
-                    <View className="flex-1">
-                        <Text className="text-sm text-neutral-400">
-                            Brak roli użytkownika.
-                        </Text>
-                    </View>
+                {tab === 'map' && <MapView />}
+                {tab === 'list' && (
+                    <ListView
+                        isDispatcher={isDispatcher}
+                        onItemPress={setSelectedActionId}
+                    />
+                )}
+                {tab === 'history' && (
+                    <HistoryView
+                        isDispatcher={isDispatcher}
+                        onItemPress={setSelectedActionId}
+                    />
                 )}
             </View>
 
-            {tab === 'list' && role === 'Dispatcher' && (
+            {tab === 'list' && isDispatcher && (
                 <AddReportButton onPress={() => setAddingReport(true)} />
             )}
 

@@ -54,3 +54,16 @@ export type EmergencyActionResponseDto = {
     respondedAt: string; // ISO datetime
 };
 
+export type VolunteerEmergencyAction = EmergencyAction & {
+    hasResponded: boolean;
+    myResponseStatus: EmergencyActionResponseStatusValue | null;
+    myRespondedAt: string | null;
+};
+
+export type EmergencyActionHistory = {
+    id: string;
+    emergencyActionId: string;
+    message: string;
+    createdByUserId: string;
+    createdAt: string; // ISO datetime
+};
