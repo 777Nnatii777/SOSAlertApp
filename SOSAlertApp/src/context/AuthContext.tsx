@@ -33,6 +33,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 if (token) {
                     const { roles: decodedRoles, exp } = decodeAuth(token);
                     if (isTokenExpired(exp)) {
+                        const pushToken = await pushTokenStorage.get();
+                        if (pushToken) {
+                            try {
+                                await unregisterPushToken({ token: pushToken });
+                            } catch {
+                            }
+                            await pushTokenStorage.remove();
+                        }
                         await tokenStorage.remove();
                     } else {
                         setRoles(decodedRoles);
@@ -56,19 +64,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const signOut = async () => {
         console.log('[signOut] start');
-        try {
-            const pushToken = await pushTokenStorage.get();
-            console.log('[signOut] pushToken z SecureStore:', pushToken);
-            if (pushToken) {
+        const pushToken = await pushTokenStorage.get();
+        console.log('[signOut] pushToken z SecureStore:', pushToken);
+        if (pushToken) {
+            try {
                 console.log('[signOut] wysyłam unregister');
                 await unregisterPushToken({ token: pushToken });
-                await pushTokenStorage.remove();
                 console.log('[signOut] unregister OK');
-            } else {
-                console.log('[signOut] brak tokena w SecureStore — pomijam unregister');
+            } catch (err) {
+                console.warn('[push] Wypisanie tokena się nie udało:', err);
+            } finally {
+                await pushTokenStorage.remove();
             }
-        } catch (err) {
-            console.warn('[push] Wypisanie tokena się nie udało:', err);
+        } else {
+            console.log('[signOut] brak tokena w SecureStore — pomijam unregister');
         }
         await apiLogout();
         setRoles([]);
