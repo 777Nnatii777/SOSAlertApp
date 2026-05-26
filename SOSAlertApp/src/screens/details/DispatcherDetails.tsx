@@ -5,6 +5,8 @@ import { ResponseListItem } from '../../components/emergencyActions/ResponseList
 import { HistoryListItem } from '../../components/emergencyActions/HistoryListItem';
 import { SectionHeader } from '../../components/ui/SectionHeader';
 import { Loading, ErrorMessage } from '../../components/ui/Status';
+import { CommentSection } from '../../components/emergencyActions/CommentSection';
+import { EmergencyActionStatus } from '../../types/emergencyAction';
 import {
     useAcceptEmergencyAction,
     useActionHistory,
@@ -49,6 +51,16 @@ export function DispatcherDetails({ actionId }: Props) {
                 onReject={() => rejectMutation.mutate(actionId)}
                 isPending={isPending}
             />
+            {action.status !== EmergencyActionStatus.WaitingForVolunteers && (
+                <>
+                    <SectionHeader title="Komentarz" />
+                    <CommentSection
+                        actionId={actionId}
+                        initialComment={action.comment}
+                        canEdit={true}
+                    />
+                </>
+                )}
 
             <SectionHeader title="Historia zdarzeń" />
             {history && history.length > 0 ? (

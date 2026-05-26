@@ -11,9 +11,9 @@ import {
     rejectEmergencyAction,
     getResponses,
     getActionHistory,
-    getVolunteerHistory,
+    getVolunteerHistory, setComment,
 } from '../services/emergencyActionsService';
-import type { CreateEmergencyActionRequest } from '../types/emergencyAction';
+import type {CreateEmergencyActionRequest, SetCommentRequest} from '../types/emergencyAction';
 import { respondToEmergencyAction } from '../services/emergencyActionsService';
 
 const KEYS = {
@@ -101,8 +101,24 @@ export function useRejectEmergencyAction() {
     return useMutation({
         mutationFn: (actionId: string) => rejectEmergencyAction(actionId),
         onSuccess: (_, actionId) => {
-            queryClient.invalidateQueries({ queryKey: ['emergencyActions'] });
-            queryClient.invalidateQueries({ queryKey: KEYS.history(actionId) });
+            queryClient.invalidateQueries({queryKey: ['emergencyActions']});
+            queryClient.invalidateQueries({queryKey: KEYS.history(actionId)});
         },
     });
 }
+    export function useSetComment() {
+        const queryClient = useQueryClient();
+        return useMutation({
+            mutationFn: ({
+                             actionId,
+                             body,
+                         }: {
+                actionId: string;
+                body: SetCommentRequest;
+            }) => setComment(actionId, body),
+            onSuccess: (_, { actionId }) => {
+                queryClient.invalidateQueries({ queryKey: ['emergencyActions'] });
+                queryClient.invalidateQueries({ queryKey: KEYS.history(actionId) });
+            },
+        });
+    }

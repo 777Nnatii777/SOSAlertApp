@@ -1,7 +1,7 @@
 import { apiFetch } from './apiClient';
 import type {
     CreateEmergencyActionRequest,
-    EmergencyAction, EmergencyActionHistory, EmergencyActionResponseDto, VolunteerEmergencyAction,
+    EmergencyAction, EmergencyActionHistory, EmergencyActionResponseDto, SetCommentRequest, VolunteerEmergencyAction,
 } from '../types/emergencyAction';
 
 const BASE_PATH = '/api/EmergencyActions';
@@ -87,6 +87,17 @@ export async function respondToEmergencyAction(
     const response = await apiFetch(`${BASE_PATH}/${actionId}/respond`, {
         method: 'POST',
         body: JSON.stringify({ status }),
+    });
+    await handleErrors(response);
+}
+
+export async function setComment(
+    actionId: string,
+    body: SetCommentRequest,
+): Promise<void> {
+    const response = await apiFetch(`${BASE_PATH}/${actionId}/comment`, {
+        method: 'PUT',
+        body: JSON.stringify(body),
     });
     await handleErrors(response);
 }

@@ -6,6 +6,9 @@ import {
     useRespondToEmergencyAction,
     useVolunteerActions,
 } from '../../hooks/useEmergencyActions';
+import {EmergencyActionStatus} from "../../types/emergencyAction";
+import {SectionHeader} from "../../components/ui/SectionHeader";
+import {CommentSection} from "../../components/emergencyActions/CommentSection";
 
 type Props = {
     actionId: string;
@@ -29,6 +32,18 @@ export function VolunteerDetails({ actionId }: Props) {
                 onRespond={(status) => respondMutation.mutate({ actionId, status })}
                 isPending={respondMutation.isPending}
             />
+            {action.status !== EmergencyActionStatus.WaitingForVolunteers && action.comment && (
+                <>
+                    <SectionHeader title="Komentarz dyspozytora" />
+                    <CommentSection
+                        actionId={actionId}
+                        initialComment={action.comment}
+                        canEdit={false}
+                    />
+                </>
+            )}
+
+
         </ScrollView>
     );
 }

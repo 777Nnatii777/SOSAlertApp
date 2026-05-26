@@ -35,6 +35,6 @@ export async function unregisterPushToken(
     });
 
     if (!response.ok && response.status !== 404) {
-        console.warn(`[push] Nie udało się wypisać tokena (${response.status})`);
+        throw new Error(`Nie udało się wypisać tokena (${response.status})`);
     }
 }

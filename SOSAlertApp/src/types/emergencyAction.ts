@@ -18,6 +18,7 @@ export type EmergencyAction = {
     region: string;
     status: EmergencyActionStatusValue;
     createdAt: string; // ISO datetime
+    comment: string | null;
 };
 
 export type CreateEmergencyActionRequest = {
@@ -66,4 +67,7 @@ export type EmergencyActionHistory = {
     message: string;
     createdByUserId: string;
     createdAt: string; // ISO datetime
+};
+export type SetCommentRequest = {
+    comment: string | null;
 };
