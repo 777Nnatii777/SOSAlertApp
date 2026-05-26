@@ -11,6 +11,7 @@ import {ReportDetailsScreen} from "./ReportDetailsScreen";
 import {MapView} from "./home/MapView";
 import {ListView} from "./home/ListView";
 import {HistoryView} from "./home/HistoryView";
+import {useNotificationResponse} from "../hooks/useNotificationResponse";
 
 
 export function HomeScreen() {
@@ -22,6 +23,9 @@ export function HomeScreen() {
     const [addingReport, setAddingReport] = useState(false);
     const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
 
+    useNotificationResponse({
+        onActionPressed: (actionId) => setSelectedActionId(actionId),
+    });
 
     if (addingReport) {
         return (
