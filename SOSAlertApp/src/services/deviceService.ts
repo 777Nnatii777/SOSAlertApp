@@ -21,3 +21,20 @@ export async function registerPushToken(
         throw new Error(`Nie udało się zarejestrować tokena (${response.status})`);
     }
 }
+
+type UnregisterPushTokenRequest = {
+    token: string;
+};
+
+export async function unregisterPushToken(
+    body: UnregisterPushTokenRequest,
+): Promise<void> {
+    const response = await apiFetch('/api/devices/unregister-push-token', {
+        method: 'DELETE',
+        body: JSON.stringify(body),
+    });
+
+    if (!response.ok && response.status !== 404) {
+        console.warn(`[push] Nie udało się wypisać tokena (${response.status})`);
+    }
+}

@@ -7,8 +7,9 @@ import {
 } from 'react';
 import { login as apiLogin, logout as apiLogout } from '../services/authService';
 import { decodeAuth, isTokenExpired } from '../services/jwt';
-import { tokenStorage } from '../services/tokenStorage';
+import {pushTokenStorage, tokenStorage} from '../services/tokenStorage';
 import type { Role } from '../types/auth';
+import {unregisterPushToken} from "../services/deviceService";
 
 type AuthState = {
     isLoading: boolean;
@@ -54,9 +55,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     const signOut = async () => {
+        console.log('[signOut] start');
+        try {
+            const pushToken = await pushTokenStorage.get();
+            console.log('[signOut] pushToken z SecureStore:', pushToken);
+            if (pushToken) {
+                console.log('[signOut] wysyłam unregister');
+                await unregisterPushToken({ token: pushToken });
+                await pushTokenStorage.remove();
+                console.log('[signOut] unregister OK');
+            } else {
+                console.log('[signOut] brak tokena w SecureStore — pomijam unregister');
+            }
+        } catch (err) {
+            console.warn('[push] Wypisanie tokena się nie udało:', err);
+        }
         await apiLogout();
         setRoles([]);
         setIsAuthenticated(false);
+        console.log('[signOut] koniec');
     };
 
     return (

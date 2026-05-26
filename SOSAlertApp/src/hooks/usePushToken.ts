@@ -5,6 +5,7 @@ import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 import { useAuth } from '../context/AuthContext';
 import { registerPushToken } from '../services/deviceService';
+import {pushTokenStorage} from "../services/tokenStorage";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -78,6 +79,7 @@ export function usePushToken() {
                     token,
                     platform: Platform.OS as 'ios' | 'android' | 'web',
                 });
+                await pushTokenStorage.save(token);
                 console.log('[push] Token zarejestrowany w backendzie.');
             } catch (err) {
                 console.error('[push] Błąd rejestracji w backendzie:', err);
